@@ -1,0 +1,5 @@
+Zebrafy
+pypdf
+pdf2img
+numpy
+fastcgi
