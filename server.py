@@ -20,7 +20,8 @@ PRINTER_DOTS_HEIGHT = 1218
 FORMAT = "Z64"
 
 logging.basicConfig(
-    filename="pdf_converter.log",
+    # filename="pdf_converter.log",
+    stream=sys.stderr,
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s]: %(message)s",
 )
@@ -98,7 +99,7 @@ def _quarter_pages_to_zpl_images(pdf):
                 )
     return result
 
-
+@fastcgi("/tmp/fcgi.sock")
 def main():
     start = timer()
 
@@ -145,7 +146,7 @@ def main():
             dpi=dpi,
         ).to_zpl()
 
-    sys.stdout.write(zpl)
+    sys.stdout.write(f"Content-Type: text/plain\r\n\r\n{zpl}")
     t = timer() - start
     _logger.info(
         "Conversion of PDF of size %.1fkB to %.1fkB of zpl took %.2fms",
