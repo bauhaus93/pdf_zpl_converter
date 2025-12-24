@@ -81,9 +81,11 @@ def _quarter_pages_to_zpl_images(pdf):
             if ex[0] != ex[1]:
                 shrinked_rect = _get_rect(bw)
                 _logger.info(
-                    "Shrinked rectangle from %d,%d,%d,%d down to %d,%d,%d,%d",
-                    *rect,
-                    *shrinked_rect
+                    "Shrinked rectangle from %dx%d down to %dx%d",
+                    rect[2]-rect[0],
+                    rect[3]-rect[1],
+                    shrinked_rect[2]-shrinked_rect[0],
+                    shrinked_rect[3]-shrinked_rect[1],
                 )
                 result.append(
                     ZebrafyImage(
